@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+       информация о гоблинах и подзъмелье
+    </title>
+    <style>
+      body{
+          font-family: Arial, Helvetica, sans-serif;
+          background-color: #000000;
+      }
+      .todo-list{
+          background-color: rgb(151, 151, 151);
+       
+          border: 1px solid rgb(0, 0, 0 );
+          width: 1000px;
+          padding: 100px 50px;
+          border-radius: 100px;
+          margin: 250px;
+          margin-top: 20px;
+         
+      }
+      .todo-list .todo-item{
+          background-color: rgb(255, 255, 255);
+          border: 1px solid rgb(0, 0, 0 );
+          
+          padding: 10px 35px 8px 20px;
+      
+          margin: auto;
+        margin-bottom: 15px;
+        border-top-right-radius: 15px;
+        border-bottom-right-radius: 15px;
+
+      }
+      .todo-list > ul{
+          list-style: none;
+          padding: 0;
+          margin: 0;
+       }
+       .todo-list .todo-item :first-child input[type="checkbox"]{
+          display: none;
+       }
+       .todo-list .todo-item input[type="checkbox"] + label {
+          display: block;
+          width: 20px;
+          height: 20px;
+          float: right;
+          border: 2px solid #f16363;
+       }
+       .todo-list .todo-item input[type="checkbox"]:checked + label::after {
+           content: "";
+           display: block;
+           background: rgb(229, 255, 0);
+           margin: 2px;
+           position: absolute;
+         width: 16px;
+         height: 16px;
+   
+       }
+       .todo-list .todo-item input[type="checkbox"] + label,
+       .todo-list .todo-item input[type="checkbox"]:checked + label,
+       .todo-list .todo-item input[type="checkbox"]:checked + label::after {
+        border-radius: 50%;
+   
+       }
+      .todo-item.todo-item-important{
+          border-left: 6px solid rgb(0, 0, 0);
+
+       }
+       .todo-item.todo-item-asap{
+          border-left: 6px solid rgba(255, 0, 0, 0.808);
+          
+       }
+       .todo-item.todo-item-trash{
+          border-left: 6px solid rgb(0, 0, 0);
+       }
+  </style>
+</head>
+<body>
+  <div class="todo-list">
+    <h1>игра о убицах гоблинов</h1>
+    <ul>
+         <li id="todo-list">
+             <h2 class="todo-item todo-item-important ">
+               
+        <big > это игра о подземельях и гоблинах </big >
+             </h2>
+        </li>   
+        <li >
+            <h2 class= "todo-item todo-item-asap">
+              <big><big> в игре около 3 персонажей </big></big>  
+            </h2>
+            <h2>
+              <big>   <p>маг</p>  </big> 
+              <a  href="https://www.playground.ru/wiki/dragon_age_3_inquisition/gameplay/charprog/mageabilities/"> <h2>умения мага</h2> </a>
+              <img src="C:\Users\pletn\OneDrive\Рабочий стол\Новая папка (6)\картинки\маг.jpg" width="200" height="120"alt="маг"> 
+              <big>   <p>воин</p>  </big>
+              <a  href="https://www.playground.ru/wiki/dragon_age_3_inquisition/gameplay/charprog/warriorabilities/"><h2>умения воина</h2></a>
+              <img src="C:\Users\pletn\OneDrive\Рабочий стол\Новая папка (6)\картинки\воин.jpg"width="200" height="120"alt="воин">
+              <big>   <p>разбойник</p>  </big>
+              <a  href="https://www.playground.ru/wiki/dragon_age_3_inquisition/gameplay/charprog/rogueabilities/"><h2>умения разбойника</h2></a>
+              <img src="C:\Users\pletn\OneDrive\Рабочий стол\Новая папка (6)\картинки\охотник.jpg"width="200" height="120"alt="охотник">
+            </h2>
+         </li>   
+        <li>
+            <h2 class="todo-item todo-item-trash">
+             
+              <big>     в игре присутвуют только гоблины их около 30  и  каждый имеет разные способности  </big>    </h2>
+           <p><a href="https://stopgame.ru/blogs/topic/100602">   <big>  иформация о самих гоблинах </big> </a></p> 
+          
+            <p>
+              <big> <big> вы начнаете игру в деревне за посланика из  другого мира и вам предстоит пройти около 100 этажей </big></big>  
+            </p>
+        </li>  
+         <p>
+            </p>
+        </li>   
+    </ul>
+</body>
+</html>
+
+</div>
