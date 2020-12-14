@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link type="text/css" href="style.css" rel="stylesheet">
+    <title>
+        TODO APP
+    </title>
+    <script>
+        // объеявляем перменную которая хранит часть детали кода
+         let dataRepository = {
+             // передаем параметры ключа,которые вернут значния по указанному ключу
+             getItem: () => {
+                 // передали значения переменой  предоставив объект todo-list
+                 let string = localStorage.getItem("todo-list");
+                 // возвращаем функцию в значение json(sring)
+                 return JSON.parse(string) // string -> {}, []
+             },
+             // передаём значния ключа value
+             setItem: (value) => {
+                let json = JSON.stringify(value)
+                localStorage.setItem('todo-list', json)
+             },
+
+             delete: (card) => {},
+             //Подменяем переданой карточкой старую с условием по идентиификатору
+             update: (card) => {
+                let newCards = dataRepository.getAllCards().map((el) => {
+                    if (el.id == card.id) {
+                        return card
+                    } else {
+                        return el
+                    }
+                })
+//создаём коллекцию для новой карточки
+                dataRepository.setItem(newCards)
+             },
+             //создаем новый объект для карточки
+             create: (card) => {},
+             getAllCards: () => {
+                return dataRepository.getItem('todo-list')
+             }
+        }
+
+        var todoItemTemplate = 
+        '<li class="todo-item todo-item-important">' +
+            '<h2> {title}' +
+                '<input id="todo-item-{item-id}" data-id="{item-id}"  type="checkbox" {isChecked}/>' +
+                '<label for="todo-item-{item-id}">' +
+                '</label>' +
+            '</h2>' +
+            '<p>' +
+                 '{description}' +
+            '</p>' + 
+        '</li>';
+
+        //Функция инициализации
+        function init() {
+            console.log("Инициализация прошла")
+            
+            loadSampleData()    
+            render()
+        }
+// получаем данные через функцию
+        function updateCardAttributeById(id, attribute, value) {
+            let findedCard = dataRepository.getAllCards().filter((el) => {
+                return el.id == id
+            })[0]
+            findedCard[attribute] = value
+            dataRepository.update(findedCard)
+        }
+
+        function bindUserInputEvents() {
+            let elements = document.querySelectorAll('input');
+            console.log(elements)
+            elements.forEach((el) => {
+                el.addEventListener('change', (event) => {
+                    updateCardAttributeById(el.getAttribute("data-id"), "isChecked", el.checked)
+                })
+            });
+        }   
+
+        function loadSampleData() {
+            if (dataRepository.getItem("todo-list") != null) {
+                return
+            } 
+            dataRepository.setItem([
+                    {
+                        id: 1,
+                        title: "Помыть посуду",
+                        description: "Помыть посуду пока мамка не вернулась с работы и не дала пизды",
+                        isChecked: false
+                    },
+                    {
+                        id: 2,
+                        title: "Погулять с собакой",
+                        description: "не менее 1 часа",
+                        isChecked: false
+                    },
+                    {
+                        id: 3,
+                        title: "Приготовить покушать",
+                        description: "Список еды какой нибудь здесь",
+                        isChecked: false
+            }])
+        }
+
+        //Отображаем карточки
+        function render() {
+            var html = "";
+            let cards = dataRepository.getAllCards()   
+            console.log(cards);
+            for(var i = 0; i < cards.length; i++) {
+                html += fillCardTemplateWithCardObject(cards[i]);
+            }
+
+            let element = window.document.getElementsByClassName("todo-list-items")[0];
+            element.innerHTML = html
+            
+            //Как только элементы готовы, биндимся на них
+            bindUserInputEvents()
+        }
+
+        //Заполняем шаблон и возвращаем его
+        function fillCardTemplateWithCardObject(card) {
+            return todoItemTemplate
+            .replaceAll('{title}', card.title)
+            .replaceAll('{isChecked}', card.isChecked ? 'checked' : '')
+            .replaceAll('{item-id}', card.id)
+            .replaceAll('{description}', card.description)
+        }
+
+        //Изменяем состояние карточки на противоположное 
+        function toggle(card) {
+            card.isChecked = !card.isChecked
+        }
+
+        //Страница загружена, вызываем то что нам надо
+        window.onload = (event) => {
+            init();    
+        };   
+    </script>
+</head>
+<body>   
+    <div class="todo-list">
+            <h1 id="header-title">Список дел</h1>
+            <ul class="todo-list-items">   
+            </ul>
+    </div>
+</body>
+</html>
