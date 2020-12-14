@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link type="text/css" href="style.css" rel="stylesheet">
+    <title>
+        TODO APP
+    </title>
+    <script>
+
+         //Список карточек , который мы используем для шаблона
+         let cards = [
+            {
+                id: 1,
+                title: "Помыть посуду",
+                description: "Помыть посуду пока мамка не вернулась с работы и не дала пизды",
+                isChecked: false
+            },
+            {
+                id: 2,
+                title: "Погулять с собакой",
+                description: "не менее 1 часа",
+                isChecked: false
+            },
+            {
+                id: 3,
+                title: "Приготовить покушать",
+                description: "Список еды какой нибудь здесь",
+                isChecked: false
+            } 
+        ];
+// шаблон в который мы используем для карточек
+        var todoItemTemplate = 
+        '<li class="todo-item todo-item-important">' +
+            '<h2> {title}' +
+                '<input id="todo-item-{item-id}" type="checkbox" {isChecked}/>' +
+                '<label for="todo-item-{item-id}">' +
+                '</label>' +
+            '</h2>' +
+            '<p>' +
+                 '{description}' +
+            '</p>' + 
+        '</li>';
+
+        //Функция инициализации
+        function init() {
+            console.log("Инициализация прошла")
+            render()
+        }
+
+        function render() {
+            var html = "";
+            // функция в которой происходит частичное замещения карточек 
+             for(var i = 0; i < cards.length; i++){
+                 html += fillCardTemplateWithCardObject(cards[i]);
+             }
+// позволяет работать с содержимым страницы
+         let element = window.document.getElementsByClassName("todo-list-items")[0];
+         element.innerHTML = html
+         // позволяет получить и изменить содержимое страницы
+        }
+
+        //Заполняем шаблон и возвращаем его для карточек которые мы написали
+        function fillCardTemplateWithCardObject(card) {
+            return todoItemTemplate
+                   .replaceAll('{title}', card.title)
+                   .replaceAll('{isCheked}', card.isChecked ? 'checked' : '')
+                   .replaceAll('{item-id}', card.id)
+                   .replaceAll('{description}', card.description)
+        }
+
+        //Изменяем состояние карточки на противоположное 
+        function toggle(card) {
+            card.isChecked = !card.isChecked
+        }
+
+        //Страница загружена, вызываем то что нам надо
+        window.onload = (event) => {
+            init();    
+        };
+        
+    </script>
+</head>
+<body>   
+    <div class="todo-list">
+            <h1 id="header-title">Список дел</h1>
+            <ul class = "todo-list-items">   
+            </ul>
+    </div>
+</body>
+</html>
