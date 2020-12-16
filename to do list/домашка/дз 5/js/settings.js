@@ -9,14 +9,14 @@ let dataRepository = { // создание объекта
         localStorage.setItem('sp-content', json) // добавление json с ключом 
     },
 
-    delete: (sap) => { // удаления
+    delete: (sp) => { // удаления
 
     },
 
-    update: (sap) => { // обновления новости
+    update: (sp) => { // обновления новости
         let newSp = dataRepository.getAllSp().map((el) => { //сравнивает новости и обновляет ее на новую ,когда нужно
             if (el.id == paper.id) {
-                return sap
+                return sp
             } else {
                 return el
             }
